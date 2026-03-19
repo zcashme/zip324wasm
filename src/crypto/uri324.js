@@ -1,4 +1,10 @@
-export function buildClaimUri324(amountZec, memo, bech32Key) {
+const CLAIM_HOSTS = {
+  mainnet: "pay.withzcash.com",
+  testnet: "pay.testzcash.com",
+};
+
+export function buildClaimUri324(amountZec, memo, bech32Key, network = "mainnet") {
+  const host = CLAIM_HOSTS[network] ?? CLAIM_HOSTS.mainnet;
   const parts = [];
   parts.push(`amount=${encodeURIComponent(amountZec)}`);
 
@@ -8,5 +14,5 @@ export function buildClaimUri324(amountZec, memo, bech32Key) {
 
   parts.push(`key=${encodeURIComponent(bech32Key)}`);
 
-  return `https://pay.withzcash.com:65536/payment/v1#${parts.join("&")}`;
+  return `https://${host}:65536/payment/v1#${parts.join("&")}`;
 }
