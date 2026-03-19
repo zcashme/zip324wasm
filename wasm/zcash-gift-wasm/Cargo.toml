@@ -1,0 +1,13 @@
+[package]
+name = "zcash-gift-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+bech32 = "0.11"
+sapling-crypto = { version = "0.5", default-features = false }
+wasm-bindgen = "0.2.105"
+zcash_protocol = { version = "0.7", default-features = false }

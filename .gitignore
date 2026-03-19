@@ -1,0 +1,9 @@
+/node_modules/
+/dist/
+/public/wasm/
+/src/wasm/pkg/
+/wasm/zcash-gift-wasm/target/
+
+.DS_Store
+Thumbs.db
+*.log
