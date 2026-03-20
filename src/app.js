@@ -232,12 +232,31 @@ export function mountApp(root) {
     const frame = document.createElement("main");
     frame.className = "app-shell";
 
+    const titleBar = document.createElement("header");
+    titleBar.className = "title-bar";
+
+    const titleBrand = document.createElement("div");
+    titleBrand.className = "title-brand";
+    titleBrand.append(createZcashLogo(44));
+
+    const titleCopy = document.createElement("div");
+    titleCopy.className = "title-copy";
+
+    const appTitle = document.createElement("h1");
+    appTitle.className = "app-title";
+    appTitle.textContent = "Zcash Gift Card";
+
+    titleCopy.append(appTitle);
+    titleBrand.append(titleCopy);
+    titleBar.append(titleBrand);
+    frame.append(titleBar);
+
     const hero = document.createElement("section");
     hero.className = "hero";
 
     const heroTitle = document.createElement("p");
     heroTitle.className = "hero-kicker";
-    heroTitle.textContent = "Client-only flow";
+    heroTitle.textContent = "Client-side only";
 
     const heroHeading = document.createElement("h1");
     heroHeading.className = "hero-title";
@@ -292,8 +311,38 @@ export function mountApp(root) {
 
     const footer = document.createElement("footer");
     footer.className = "app-footer";
-    footer.textContent =
+
+    const footerBrand = document.createElement("div");
+    footerBrand.className = "footer-brand";
+    footerBrand.append(createZcashLogo(24));
+
+    const footerBrandLabel = document.createElement("span");
+    footerBrandLabel.textContent = "Zcash Gift Card";
+    footerBrand.append(footerBrandLabel);
+
+    const footerLinks = document.createElement("div");
+    footerLinks.className = "footer-links";
+
+    const specLink = document.createElement("a");
+    specLink.href = "https://zips.z.cash/zip-0324";
+    specLink.target = "_blank";
+    specLink.rel = "noopener noreferrer";
+    specLink.textContent = "ZIP 324 Spec";
+
+    const repoLink = document.createElement("a");
+    repoLink.href = "https://github.com/zcashme/zip324wasm";
+    repoLink.target = "_blank";
+    repoLink.rel = "noopener noreferrer";
+    repoLink.textContent = "GitHub";
+
+    footerLinks.append(specLink, repoLink);
+
+    const footerNote = document.createElement("p");
+    footerNote.className = "footer-note";
+    footerNote.textContent =
       "No analytics, no remote logging, no server-side key storage. Keep the claim URI private.";
+
+    footer.append(footerBrand, footerLinks, footerNote);
 
     frame.append(screenNode, footer);
     root.append(frame);
@@ -344,4 +393,29 @@ function toZatoshis(value) {
   const fractionPart = BigInt((fraction.padEnd(8, "0") || "0").slice(0, 8));
 
   return wholePart + fractionPart;
+}
+
+function createZcashLogo(size) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", "0 0 493.3 490.2");
+  svg.setAttribute("width", String(size));
+  svg.setAttribute("height", String(size));
+  svg.setAttribute("aria-hidden", "true");
+  svg.classList.add("zcash-logo");
+
+  const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  circle.setAttribute("cx", "245.4");
+  circle.setAttribute("cy", "245.4");
+  circle.setAttribute("r", "225.4");
+  circle.setAttribute("fill", "#f3b724");
+
+  const mark = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  mark.setAttribute(
+    "d",
+    "m165 315.5v34.4h61.5v37.7h37.8v-37.7h61.5v-45.5h-95.4l95.4-129.4v-34.4h-61.5v-37.6h-37.8v37.6h-61.5v45.6h95.4z",
+  );
+  mark.setAttribute("fill", "#fff");
+
+  svg.append(circle, mark);
+  return svg;
 }

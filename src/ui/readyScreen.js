@@ -13,7 +13,7 @@ export function renderReadyScreen({
 
   const title = document.createElement("p");
   title.className = "eyebrow";
-  title.textContent = "Screen 3";
+  title.textContent = "Step 3 of 3";
 
   const heading = document.createElement("h1");
   heading.className = "panel-title";

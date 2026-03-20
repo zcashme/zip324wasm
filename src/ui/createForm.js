@@ -4,7 +4,7 @@ export function renderCreateForm({ state, onSubmit }) {
 
   const title = document.createElement("p");
   title.className = "eyebrow";
-  title.textContent = "Screen 1";
+  title.textContent = "Step 1 of 3";
 
   const heading = document.createElement("h1");
   heading.className = "panel-title";

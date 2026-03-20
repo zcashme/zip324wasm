@@ -11,7 +11,7 @@ export function renderFundingScreen({
 
   const title = document.createElement("p");
   title.className = "eyebrow";
-  title.textContent = "Screen 2";
+  title.textContent = "Step 2 of 3";
 
   const heading = document.createElement("h1");
   heading.className = "panel-title";
