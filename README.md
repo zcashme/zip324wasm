@@ -106,6 +106,21 @@ Open the local URL printed by Vite, usually:
 http://localhost:5173
 ```
 
+## First Run Note
+
+The generated WASM bindings in `src/wasm/pkg` are intentionally not committed.
+After cloning, run one of these before expecting the app to load:
+
+```powershell
+npm.cmd run dev
+```
+
+or:
+
+```powershell
+npm.cmd run build:wasm
+```
+
 ## Production Build
 
 ```powershell
@@ -123,6 +138,37 @@ Usually available at:
 ```text
 http://localhost:4173
 ```
+
+## GitHub Pages Deploy
+
+This repo is configured to deploy to:
+
+```text
+https://zcashme.github.io/zip324wasm/
+```
+
+Deployment model:
+
+- GitHub Pages
+- source: GitHub Actions
+- output: `dist/`
+
+To enable it in GitHub:
+
+1. Open the repository settings.
+2. Go to `Pages`.
+3. Set `Build and deployment` to `GitHub Actions`.
+
+The workflow will:
+
+- install Node
+- install Rust
+- add `wasm32-unknown-unknown`
+- install `wasm-pack`
+- install `wasm-bindgen-cli`
+- run `npm ci`
+- run `npm run build`
+- publish `dist/` to GitHub Pages
 
 ## User Flow
 
@@ -179,4 +225,3 @@ Basic check:
 3. Confirm that a Sapling address and funding QR appear.
 4. Click `I sent the funds`.
 5. Confirm that a ZIP 324 URI, claim QR, and backup download action appear.
-
